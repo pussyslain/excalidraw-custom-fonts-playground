@@ -1,0 +1,57 @@
+{
+  "name": "playground",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@excalidraw/excalidraw-next": "^0.11.0-f1bc90e",
+    "@excalidraw/utils": "^0.1.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.39",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
+    "bluebird": "^3.7.2",
+    "lodash": "^4.17.21",
+    "nanoid": "^4.0.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-portal": "^4.2.2",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.3.2",
+    "typescript": "^4.7.3",
+    "web-vitals": "^2.1.4",
+    "webfontloader": "^1.6.28"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.36",
+    "@types/lodash": "^4.14.182",
+    "@types/react-portal": "^4.0.4",
+    "@types/webfontloader": "^1.6.34"
+  }
+}
