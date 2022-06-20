@@ -65,7 +65,7 @@ export default {
       locked: false,
       text: "Sample Two",
       fontSize: 20,
-      fontFamily: 6,
+      fontFamily: 3,
       textAlign: "left",
       verticalAlign: "top",
       baseline: 19,

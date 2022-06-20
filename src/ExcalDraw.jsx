@@ -8,18 +8,18 @@ import {
   useHandleLibrary,
   MIME_TYPES,
   sceneCoordsToViewportCoords,
-  viewportCoordsToSceneCoords,
+  // viewportCoordsToSceneCoords,
 } from "@excalidraw/excalidraw-next";
 import { nanoid } from "nanoid";
 
-import { withBatchedUpdatesThrottled } from "@excalidraw/utils";
+// import { withBatchedUpdatesThrottled } from "@excalidraw/utils";
 
 import InitialData from "./initialData";
 import Sidebar from "./sidebar/Sidebar";
 
 import "./ExcalDraw.css";
 import initialData from "./initialData";
-import useInjectFontFamily from "./useInjectFontFamily";
+import useInjectFontFamily from "./hooks/useFontPlugin";
 
 const COMMENT_SVG = (
   <svg
@@ -29,10 +29,7 @@ const COMMENT_SVG = (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    class="feather feather-message-circle"
+    className="feather feather-message-circle"
   >
     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
   </svg>
@@ -431,8 +428,6 @@ export default function App() {
       />
     );
   };
-
-  console.log(">>src/ExcalDraw::", "Excalidraw", Excalidraw); //TRACE
 
   return (
     <div className="App" ref={appRef}>
