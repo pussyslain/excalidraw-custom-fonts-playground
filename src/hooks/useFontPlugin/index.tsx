@@ -105,9 +105,9 @@ export default function useFontPlugin(params: {
             container={container}
             value={selectedFontValue}
             onChange={(item) => {
-              if (!item?.value) return;
-
               const xdRef = self.current.xdRef!;
+              if (!item?.value || !xdRef) return;
+
               const { selectedElementIds } = xdRef.getAppState();
               xdRef.updateScene({
                 elements: xdRef.getSceneElements().map((element) => {

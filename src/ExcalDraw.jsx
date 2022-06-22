@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import Promise from "bluebird";
 import {
   exportToCanvas,
   exportToSvg,
@@ -12,13 +13,11 @@ import {
 } from "@excalidraw/excalidraw-next";
 import { nanoid } from "nanoid";
 
-// import { withBatchedUpdatesThrottled } from "@excalidraw/utils";
+// import { withBatchedUpdatesThrottle } from "@excalidraw/utils";
 
-import InitialData from "./initialData";
 import Sidebar from "./sidebar/Sidebar";
 
 import "./ExcalDraw.css";
-import initialData from "./initialData";
 import useInjectFontFamily from "./hooks/useFontPlugin";
 
 const COMMENT_SVG = (
@@ -62,8 +61,11 @@ const renderTopRightUI = () => {
   );
 };
 
+const dataId = "xxx-xxx";
+
 export default function App() {
   const appRef = useRef(null);
+  const [initialData, setinitialData] = React.useState(null);
   const [viewModeEnabled, setViewModeEnabled] = useState(false);
   const [zenModeEnabled, setZenModeEnabled] = useState(false);
   const [gridModeEnabled, setGridModeEnabled] = useState(false);
@@ -87,17 +89,48 @@ export default function App() {
 
   const fontModule = useInjectFontFamily({ xdRef: excalidrawAPI });
 
+  React.useEffect(() => {
+    (async () => {
+      await Promise.delay(5000);
+      const dataRes = await fetch(`${dataId}/data.json`);
+      const initialData = await dataRes.json();
+      exportToBlob({
+        mimeType: "image/png",
+        // elements: excalidrawAPI.getSceneElements(),
+        elements: initialData.elements,
+        appState: {
+          width: 300,
+          height: 100,
+        },
+        embedScene: true,
+        // files: excalidrawAPI.getFiles(),
+      }).then((blob) => {
+        console.log(">>src/ExcalDraw::", "blob", blob); //TRACE
+        const url = URL.createObjectURL(blob);
+        console.log(">>src/ExcalDraw::", "url", url); //TRACE
+        window.open(url, "_blank");
+        // const link = document.createElement("a");
+        // link.setAttribute("href", url);
+        // link.setAttribute("id", "dl-link");
+      });
+    })();
+  }, []);
+
   useEffect(() => {
     if (!excalidrawAPI) {
       return;
     }
+
     const fetchData = async () => {
       const res = await fetch("/rocket.jpeg");
       const imageData = await res.blob();
       const reader = new FileReader();
       reader.readAsDataURL(imageData);
 
-      reader.onload = function () {
+      reader.onload = async function () {
+        const dataRes = await fetch(`${dataId}/data.json`);
+        const initialData = await dataRes.json();
+
         const imagesArray = [
           {
             id: "rocket",
@@ -107,7 +140,8 @@ export default function App() {
           },
         ];
 
-        initialStatePromiseRef.current.promise.resolve(InitialData);
+        setinitialData(initialData);
+        initialStatePromiseRef.current.promise.resolve(initialData);
         excalidrawAPI.addFiles(imagesArray);
       };
     };
@@ -560,7 +594,7 @@ export default function App() {
             <div>y: {pointerData?.pointer.y ?? 0}</div>
           </div>
         </div>
-        <div className="excalidraw-wrapper">
+        {/* <div className="excalidraw-wrapper">
           <Excalidraw
             ref={(api) => {
               return setExcalidrawAPI(api);
@@ -588,7 +622,7 @@ export default function App() {
           {Object.keys(commentIcons || []).length > 0 && renderCommentIcons()}
           {comment && renderComment()}
           {fontModule.render()}
-        </div>
+        </div> */}
 
         <div className="export-wrapper button-wrapper">
           <label className="export-wrapper__checkbox">
