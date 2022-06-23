@@ -52,6 +52,7 @@
     "@types/bluebird": "^3.5.36",
     "@types/lodash": "^4.14.182",
     "@types/react-portal": "^4.0.4",
-    "@types/webfontloader": "^1.6.34"
+    "@types/webfontloader": "^1.6.34",
+    "surge": "^0.23.1"
   }
 }
