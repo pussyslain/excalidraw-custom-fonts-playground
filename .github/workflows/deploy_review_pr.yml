@@ -1,7 +1,7 @@
 name: PR Review Demo
 on:
-  pull_request_review:
-    types: [submitted]
+  pull_request:
+    branches: main
 
 jobs:
   Explore-GitHub-Actions:
