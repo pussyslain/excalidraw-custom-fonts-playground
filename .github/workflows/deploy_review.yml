@@ -23,7 +23,7 @@ jobs:
       - name: Generate build
         run: yarn build
       - name: Deploy to surge
-        run: surge --project ./build --domain xfmi321a.surge.sh
+        run: yarn surge --project ./build --domain xfmi321a.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: 58470ac0ffc4cffb065e1d3b89734f0a
